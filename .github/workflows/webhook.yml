@@ -1,0 +1,13 @@
+name: Webook external dispatch
+on:
+  repository_dispatch:
+    - types: [test]
+
+jobs:
+  run-on-failure:
+    if: ${{ !github.event.client_payload.result }}
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          MESSAGE: $ {{ github.event.client_payload.msg }}
+        run: echo $MESSAGE
