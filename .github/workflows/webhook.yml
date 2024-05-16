@@ -1,12 +1,11 @@
-name: Webook external dispatch
 on:
   repository_dispatch:
-    - types: [webhook]
+    types: [webhook]
 
 jobs:
-  run-on-failure:
+  run_if_failure:
     runs-on: ubuntu-latest
     steps:
       - env:
-          MESSAGE: $ {{ github.event.client_payload.msg }}
+          MESSAGE: ${{ github.event.client_payload.message }}
         run: echo $MESSAGE
